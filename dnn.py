@@ -8,7 +8,7 @@ from keras.layers import Dense, Activation
 from scipy import sparse
 
 try:
-  conn = psycopg2.connect("dbname='reddit' user='flyingtardigrades' host='localhost'")
+  conn = psycopg2.connect("dbname='reddit' user='s140401' host='localhost'")
 except:
   print "I am unable to connect to the database"
   
@@ -37,12 +37,6 @@ except:
   
 model = Sequential()
 model.add(Dense(output_dim=2048, input_dim=4097))
-model.add(Activation("relu"))
-model.add(Dense(output_dim=512))
-model.add(Activation("relu"))
-model.add(Dense(output_dim=128))
-model.add(Activation("relu"))
-model.add(Dense(output_dim=32))
 model.add(Activation("relu"))
 model.add(Dense(output_dim=2))
 model.add(Activation("softmax"))
@@ -82,6 +76,6 @@ for i in range(0, 1000):
     num_correct += 1
   elif prediction[i][0] < 0.5 and y_vec[i][0] < 0.5 and prediction[i][1] > 0.5:
     num_correct += 1
-print "Number: {}".format(number)
-print "Num correct: {}".format(num_correct)
+
+print model.evaluate(X_vec.toarray(), y_vec, batch_size=100)
 print float(num_correct) / float(number)
