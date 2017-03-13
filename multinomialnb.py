@@ -33,7 +33,7 @@ except:
 clf = MultinomialNB();
 clf2 = MultinomialNB();
 
-for i in range(1, 2000):
+for i in range(1, 1000):
   data = np.asarray(cur.fetchmany(1))
   word_vectorizer = HashingVectorizer(decode_error='ignore', n_features=2 ** 10, non_negative=True)
   bigram_vectorizer = HashingVectorizer(analyzer='char', n_features=2 ** 10, non_negative=True, ngram_range=(1,2))
@@ -47,7 +47,7 @@ for i in range(1, 2000):
   y_vec = data[:, 4]
   clf.partial_fit(X_vec, y_vec, classes=['True', 'False']);
 
-data = np.asarray(cur.fetchmany(2000))
+data = np.asarray(cur.fetchmany(1000))
 word_vectorizer = HashingVectorizer(decode_error='ignore', n_features=2 ** 10, non_negative=True)
 bigram_vectorizer = HashingVectorizer(analyzer='char', n_features=2 ** 10, non_negative=True, ngram_range=(1,2))
 
