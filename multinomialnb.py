@@ -22,7 +22,7 @@ sql = """select concat(title, content) as text, hash, alias, timestamp, is_spam
          order by random()"""
 sql2 = """select concat(title, content) as text, hash, alias, timestamp, is_spam 
          from spam_data
-         where hash is not null and alias is not null and timestamp is not null and key < 1000"""
+         where hash is not null and alias is not null and timestamp is not null  and length(content) < 100 and title is null;"""
 
 try:
   cur.execute(sql)
